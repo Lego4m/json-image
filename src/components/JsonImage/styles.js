@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: inline-block;
 
   h1 {
+    word-break: break-word;
     text-align: center;
     margin-bottom: 10px;
   }

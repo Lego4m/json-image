@@ -33,7 +33,7 @@ export const Sections = styled.section`
     padding: 20px;
   }
 
-  @media (max-width: 580px) {
+  @media (max-width: 840px) {
     flex-direction: column;
 
     section {
@@ -56,15 +56,32 @@ export const StyleSection = styled.section`
   }
 
   input[type='color'] {
-    margin-top: 15px;
+    margin-top: 7px;
     width: 100%;
     border: 0;
+  }
+
+  div {
+    display: flex;
+    margin-top: 7px;
+
+    button {
+      width: 100%;
+      padding: 5px;
+      margin: 0 1px;
+
+      background: #7159c1;
+      border: 0;
+      border-radius: 4px;
+      color: #fff;
+      text-align: center;
+    }
   }
 `;
 
 export const JsonSection = styled.section`
   textarea {
-    width: 200px;
+    width: 100%;
     resize: vertical;
     min-height: 187px;
 

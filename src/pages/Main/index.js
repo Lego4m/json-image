@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 import JsonImage from '../../components/JsonImage';
 
-import example from '../../example.json';
+import blank from '../../blank.json';
 
 import {
   Container,
@@ -13,10 +13,10 @@ import {
 } from './styles';
 
 export default function Main() {
-  const [data, setData] = useState(example);
+  const [data, setData] = useState(blank);
 
-  const [name, setName] = useState(data.name);
-  const [color, setColor] = useState('#fff');
+  const [name, setName] = useState(blank.name);
+  const [color, setColor] = useState('#ffffff');
 
   const JSONText = useMemo(() => JSON.stringify(data), [data]);
 
@@ -36,6 +36,22 @@ export default function Main() {
     setData((d) => ({ ...d, name }));
   }, [name]);
 
+  function handleInputCode() {
+    const response = prompt('Insira o código'); // eslint-disable-line no-alert
+
+    if (!response) {
+      return;
+    }
+
+    try {
+      const json = JSON.parse(response);
+
+      setData(json);
+    } catch {
+      alert('Código inválido!'); // eslint-disable-line no-alert
+    }
+  }
+
   return (
     <Container>
       <main>
@@ -50,6 +66,7 @@ export default function Main() {
             <input
               type="text"
               placeholder="Nome"
+              maxLength={50}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -58,6 +75,12 @@ export default function Main() {
               value={color}
               onChange={(e) => setColor(e.target.value)}
             />
+
+            <div>
+              <button type="button" onClick={handleInputCode}>
+                Inserir código
+              </button>
+            </div>
           </StyleSection>
 
           <JsonSection>

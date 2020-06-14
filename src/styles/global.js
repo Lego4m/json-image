@@ -20,4 +20,8 @@ export default createGlobalStyle`
   body, input, button {
     font-family: Roboto, Arial, Helvetica, sans-serif;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;
