@@ -7,7 +7,9 @@ import { Container, Row, Pixel } from './styles';
 export default function JsonImage({ data, size }) {
   return (
     <Container>
-      {data.map((row, rowIndex) => (
+      <h1>{data.name}</h1>
+
+      {data.image.map((row, rowIndex) => (
         <Row key={String(rowIndex)}>
           {row.map((color, pixelIndex) => (
             <Pixel
@@ -23,7 +25,10 @@ export default function JsonImage({ data, size }) {
 }
 
 JsonImage.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  }).isRequired,
   size: PropTypes.number,
 };
 

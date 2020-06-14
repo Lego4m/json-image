@@ -1,11 +1,16 @@
 import React from 'react';
 
-import JsonImage from './components/JsonImage';
+import Main from './pages/Main';
 
-import example from './example.json';
+import GlobalStyle from './styles/global';
 
 function App() {
-  return <JsonImage data={example.image} />;
+  return (
+    <>
+      <Main />
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;

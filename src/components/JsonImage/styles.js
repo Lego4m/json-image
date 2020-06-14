@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  display: inline-block;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+`;
 
 export const Row = styled.div`
   display: flex;
