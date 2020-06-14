@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import JsonImage from '../../components/JsonImage';
 
@@ -13,6 +13,29 @@ import {
 } from './styles';
 
 export default function Main() {
+  const [data, setData] = useState(example);
+
+  const [name, setName] = useState(data.name);
+  const [color, setColor] = useState('#fff');
+
+  const JSONText = useMemo(() => JSON.stringify(data), [data]);
+
+  function handleChangeColor(location) {
+    const [row, pixel] = location;
+
+    const localData = {
+      ...data,
+    };
+
+    localData.image[row][pixel] = color;
+
+    setData(localData);
+  }
+
+  useEffect(() => {
+    setData((d) => ({ ...d, name }));
+  }, [name]);
+
   return (
     <Container>
       <main>
@@ -20,16 +43,30 @@ export default function Main() {
 
         <Sections>
           <ImageSection>
-            <JsonImage data={example} />
+            <JsonImage data={data} changeColor={handleChangeColor} />
           </ImageSection>
 
           <StyleSection>
-            <input type="text" placeholder="Nome" />
-            <input type="color" />
+            <input
+              type="text"
+              placeholder="Nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
           </StyleSection>
 
           <JsonSection>
-            <textarea placeholder="JSON" readOnly autoCorrect={false} />
+            <textarea
+              placeholder="JSON"
+              readOnly
+              autoCorrect="false"
+              value={JSONText}
+            />
           </JsonSection>
         </Sections>
       </main>
