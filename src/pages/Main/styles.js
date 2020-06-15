@@ -21,75 +21,7 @@ export const Container = styled.div`
 export const Sections = styled.section`
   display: flex;
 
-  justify-content: center;
-
-  section {
-    display: flex;
-
-    background-color: #202020;
-    border-radius: 20px;
-
-    margin: 10px;
-    padding: 20px;
-  }
-
-  @media (max-width: 840px) {
+  @media (max-width: 900px) {
     flex-direction: column;
-
-    section {
-      justify-content: center;
-    }
-  }
-`;
-
-export const ImageSection = styled.section``;
-
-export const StyleSection = styled.section`
-  flex-direction: column;
-
-  input[type='text'] {
-    display: block;
-    height: 26px;
-    border: 0;
-    border-radius: 4px;
-    padding: 0 5px;
-  }
-
-  input[type='color'] {
-    margin-top: 7px;
-    width: 100%;
-    border: 0;
-  }
-
-  div {
-    display: flex;
-    margin-top: 7px;
-
-    button {
-      width: 100%;
-      padding: 5px;
-      margin: 0 1px;
-
-      background: #7159c1;
-      border: 0;
-      border-radius: 4px;
-      color: #fff;
-      text-align: center;
-    }
-  }
-`;
-
-export const JsonSection = styled.section`
-  textarea {
-    width: 100%;
-    resize: vertical;
-    min-height: 187px;
-
-    border-radius: 8px;
-    padding: 5px;
-    line-height: 12px;
-
-    color: #999;
-    background: transparent;
   }
 `;

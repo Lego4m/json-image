@@ -1,55 +1,32 @@
-import React, { useState, useEffect, useMemo } from 'react';
-
-import JsonImage from '../../components/JsonImage';
+import React, { useState } from 'react';
 
 import blank from '../../blank.json';
 
-import {
-  Container,
-  Sections,
-  ImageSection,
-  StyleSection,
-  JsonSection,
-} from './styles';
+import ImageSection from './ImageSection';
+import StyleSection from './StyleSection';
+import JsonSection from './JsonSection';
+
+import { Container, Sections } from './styles';
 
 export default function Main() {
   const [data, setData] = useState(blank);
-
-  const [name, setName] = useState(blank.name);
   const [color, setColor] = useState('#ffffff');
-
-  const JSONText = useMemo(() => JSON.stringify(data), [data]);
 
   function handleChangeColor(location) {
     const [row, pixel] = location;
 
-    const localData = {
-      ...data,
-    };
+    setData((prevData) => {
+      const localData = {
+        ...prevData,
+      };
+      localData.image[row][pixel] = color;
 
-    localData.image[row][pixel] = color;
-
-    setData(localData);
+      return localData;
+    });
   }
 
-  useEffect(() => {
-    setData((d) => ({ ...d, name }));
-  }, [name]);
-
-  function handleInputCode() {
-    const response = prompt('Insira o código'); // eslint-disable-line no-alert
-
-    if (!response) {
-      return;
-    }
-
-    try {
-      const json = JSON.parse(response);
-
-      setData(json);
-    } catch {
-      alert('Código inválido!'); // eslint-disable-line no-alert
-    }
+  function handleChangeName(name) {
+    setData({ ...data, name });
   }
 
   return (
@@ -58,39 +35,14 @@ export default function Main() {
         <h1>JSON Image</h1>
 
         <Sections>
-          <ImageSection>
-            <JsonImage data={data} changeColor={handleChangeColor} />
-          </ImageSection>
+          <ImageSection data={data} onChangeColor={handleChangeColor} />
 
-          <StyleSection>
-            <input
-              type="text"
-              placeholder="Nome"
-              maxLength={50}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="color"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-            />
+          <StyleSection
+            onChangeName={handleChangeName}
+            onChangeColor={setColor}
+          />
 
-            <div>
-              <button type="button" onClick={handleInputCode}>
-                Inserir código
-              </button>
-            </div>
-          </StyleSection>
-
-          <JsonSection>
-            <textarea
-              placeholder="JSON"
-              readOnly
-              autoCorrect="false"
-              value={JSONText}
-            />
-          </JsonSection>
+          <JsonSection data={data} onCode={setData} />
         </Sections>
       </main>
     </Container>

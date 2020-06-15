@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Container, Row, Pixel } from './styles';
 
-export default function JsonImage({ data, size, changeColor }) {
+export default function JsonImage({ data, size, onChangeColor }) {
   return (
     <Container>
       <h1>{data.name}</h1>
@@ -16,7 +16,7 @@ export default function JsonImage({ data, size, changeColor }) {
               key={String(`${rowIndex}${pixelIndex}`)}
               color={color}
               size={size}
-              onClick={() => changeColor([rowIndex, pixelIndex])}
+              onClick={() => onChangeColor([rowIndex, pixelIndex])}
             />
           ))}
         </Row>
@@ -31,7 +31,7 @@ JsonImage.propTypes = {
     image: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   }).isRequired,
   size: PropTypes.number,
-  changeColor: PropTypes.func.isRequired,
+  onChangeColor: PropTypes.func.isRequired,
 };
 
 JsonImage.defaultProps = {
