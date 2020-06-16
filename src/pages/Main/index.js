@@ -29,13 +29,40 @@ export default function Main() {
     setData({ ...data, name });
   }
 
+  function handleAddRow() {
+    const localData = {
+      ...data,
+    };
+
+    localData.image.push(localData.image[0].map(() => '#ffffff'));
+
+    setData(localData);
+  }
+
+  function handleRemoveRow() {
+    if (data.image.length <= 1) {
+      return;
+    }
+    const localData = {
+      ...data,
+    };
+    localData.image.pop();
+
+    setData(localData);
+  }
+
   return (
     <Container>
       <main>
         <h1>JSON Image</h1>
 
         <Sections>
-          <ImageSection data={data} onChangeColor={handleChangeColor} />
+          <ImageSection
+            data={data}
+            onChangeColor={handleChangeColor}
+            onAddRow={handleAddRow}
+            onRemoveRow={handleRemoveRow}
+          />
 
           <StyleSection
             onChangeName={handleChangeName}

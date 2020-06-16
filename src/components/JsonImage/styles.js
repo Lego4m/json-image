@@ -17,7 +17,7 @@ export const Row = styled.div`
 `;
 
 export const Pixel = styled.div`
-  margin: 1px;
+  margin: 0.5px;
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   background-color: ${(props) => props.color};
