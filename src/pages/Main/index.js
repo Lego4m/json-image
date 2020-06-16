@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import blank from '../../blank.json';
 
@@ -10,19 +10,16 @@ import { Container, Sections } from './styles';
 
 export default function Main() {
   const [data, setData] = useState(blank);
-  const [color, setColor] = useState('#ffffff');
+  const colorRef = useRef();
 
   function handleChangeColor(location) {
     const [row, pixel] = location;
 
-    setData((prevData) => {
-      const localData = {
-        ...prevData,
-      };
-      localData.image[row][pixel] = color;
+    const localData = { ...data };
 
-      return localData;
-    });
+    localData.image[row][pixel] = colorRef.current.value;
+
+    setData(localData);
   }
 
   function handleChangeName(name) {
@@ -30,9 +27,7 @@ export default function Main() {
   }
 
   function handleAddRow() {
-    const localData = {
-      ...data,
-    };
+    const localData = { ...data };
 
     localData.image.push(localData.image[0].map(() => '#ffffff'));
 
@@ -43,10 +38,17 @@ export default function Main() {
     if (data.image.length <= 1) {
       return;
     }
-    const localData = {
-      ...data,
-    };
+    const localData = { ...data };
+
     localData.image.pop();
+
+    setData(localData);
+  }
+
+  function handleClearImage() {
+    const localData = { ...data };
+
+    localData.image = localData.image.map((row) => row.map(() => '#ffffff'));
 
     setData(localData);
   }
@@ -66,7 +68,8 @@ export default function Main() {
 
           <StyleSection
             onChangeName={handleChangeName}
-            onChangeColor={setColor}
+            onClearImage={handleClearImage}
+            colorRef={colorRef}
           />
 
           <JsonSection data={data} onCode={setData} />
