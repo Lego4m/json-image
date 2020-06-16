@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Container, Row, Pixel } from './styles';
+import { ZoomIn, ZoomOut } from 'react-feather';
 
-export default function JsonImage({ data, size, onChangeColor }) {
+import { Container, Row, Pixel, Buttons } from './styles';
+
+export default function JsonImage({ data, size, onChangeColor, canResize }) {
+  const [pixelSize, setPixelSize] = useState(size);
+
+  function handleZoomIn() {
+    if (pixelSize >= 28) {
+      return;
+    }
+
+    setPixelSize(pixelSize + 2);
+  }
+
+  function handleZoomOut() {
+    if (pixelSize <= 12) {
+      return;
+    }
+
+    setPixelSize(pixelSize - 2);
+  }
+
   return (
     <Container>
       <h1>{data.name}</h1>
+
+      {canResize && (
+        <Buttons>
+          <button type="button" onClick={handleZoomIn}>
+            <ZoomIn color="#fff" />
+          </button>
+          <button type="button" onClick={handleZoomOut}>
+            <ZoomOut color="#fff" />
+          </button>
+        </Buttons>
+      )}
 
       {data.image.map((row, rowIndex) => (
         <Row key={String(rowIndex)}>
@@ -15,7 +46,7 @@ export default function JsonImage({ data, size, onChangeColor }) {
             <Pixel
               key={String(`${rowIndex}${pixelIndex}`)}
               color={color}
-              size={size}
+              size={pixelSize}
               onClick={() => onChangeColor([rowIndex, pixelIndex])}
             />
           ))}
@@ -32,8 +63,10 @@ JsonImage.propTypes = {
   }).isRequired,
   size: PropTypes.number,
   onChangeColor: PropTypes.func.isRequired,
+  canResize: PropTypes.bool,
 };
 
 JsonImage.defaultProps = {
   size: 20,
+  canResize: true,
 };

@@ -18,6 +18,10 @@ export const Buttons = styled.div`
   margin-top: 6px;
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     max-width: 40px;
     width: 100%;
     padding: 5px;
@@ -27,6 +31,5 @@ export const Buttons = styled.div`
     border: 0;
     border-radius: 4px;
     color: #fff;
-    text-align: center;
   }
 `;

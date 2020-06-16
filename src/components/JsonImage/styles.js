@@ -8,7 +8,7 @@ export const Container = styled.div`
   h1 {
     word-break: break-word;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 `;
 
@@ -21,4 +21,24 @@ export const Pixel = styled.div`
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   background-color: ${(props) => props.color};
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 40px;
+    width: 100%;
+    margin: 0 1px;
+
+    background: none;
+    border: 0;
+    color: #fff;
+  }
 `;

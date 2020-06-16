@@ -2,6 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import { PlusCircle, MinusCircle } from 'react-feather';
+
 import JsonImage from '../../../components/JsonImage';
 
 import { Container, Buttons } from './styles';
@@ -17,10 +19,10 @@ export default function ImageSection({
       <JsonImage data={data} onChangeColor={onChangeColor} />
       <Buttons>
         <button type="button" onClick={onRemoveRow}>
-          -
+          <MinusCircle size={18} />
         </button>
         <button type="button" onClick={onAddRow}>
-          +
+          <PlusCircle size={18} />
         </button>
       </Buttons>
     </Container>
