@@ -12,7 +12,7 @@ export default function Main() {
   const [data, setData] = useState(blank);
 
   const [tool, setTool] = useState('pencil');
-  const [colorsHistory, setColorsHistory] = useState([]);
+  const [colorsHistory, setColorsHistory] = useState(['#000000']);
 
   const colorRef = useRef();
 

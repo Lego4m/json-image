@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 
 import {
   Container,
+  NameContainer,
   Tools,
   PencilTool,
   DropperTool,
   EraserTool,
+  ColorContainer,
   History,
   HistoryPixel,
   Buttons,
@@ -60,12 +62,14 @@ export default function StyleSection({
 
   return (
     <Container>
-      <input
-        type="text"
-        placeholder="Nome"
-        maxLength={50}
-        onChange={(e) => onChangeName(e.target.value)}
-      />
+      <NameContainer>
+        <input
+          type="text"
+          placeholder="Nome"
+          maxLength={50}
+          onChange={(e) => onChangeName(e.target.value)}
+        />
+      </NameContainer>
 
       <Tools>
         <PencilTool
@@ -82,17 +86,19 @@ export default function StyleSection({
         />
       </Tools>
 
-      <input type="color" defaultValue="#ffffff" ref={colorRef} />
+      <ColorContainer>
+        <input type="color" defaultValue="#000000" ref={colorRef} />
 
-      <History>
-        {history.map((color) => (
-          <HistoryPixel
-            key={`HP${color}`}
-            color={color}
-            onClick={() => handleChangeColor(color)}
-          />
-        ))}
-      </History>
+        <History>
+          {history.map((color) => (
+            <HistoryPixel
+              key={`HP${color}`}
+              color={color}
+              onClick={() => handleChangeColor(color)}
+            />
+          ))}
+        </History>
+      </ColorContainer>
 
       <Buttons>
         {clearSecurityLayer ? (

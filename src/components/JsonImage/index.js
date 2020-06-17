@@ -62,11 +62,12 @@ JsonImage.propTypes = {
     image: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   }).isRequired,
   size: PropTypes.number,
-  onClickInPixel: PropTypes.func.isRequired,
+  onClickInPixel: PropTypes.func,
   canResize: PropTypes.bool,
 };
 
 JsonImage.defaultProps = {
+  onClickInPixel: () => {},
   size: 20,
   canResize: true,
 };

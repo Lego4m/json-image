@@ -13,6 +13,12 @@ export const Container = styled.section`
 
   margin: 10px;
   padding: 20px;
+`;
+
+export const NameContainer = styled.div`
+  padding: 10px;
+  border-radius: 10px;
+  background: #141414;
 
   input[type='text'] {
     width: 100%;
@@ -21,16 +27,14 @@ export const Container = styled.section`
     border-radius: 4px;
     padding: 0 5px;
   }
-
-  input[type='color'] {
-    width: 100%;
-    margin-top: 6px;
-  }
 `;
 
 export const Tools = styled.div`
   display: flex;
   margin-top: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #141414;
 `;
 
 export const PencilTool = styled(MdBorderColor).attrs(({ selected }) => ({
@@ -60,6 +64,17 @@ export const EraserTool = styled(FaEraser).attrs(({ selected }) => ({
   margin: 0 2px;
 `;
 
+export const ColorContainer = styled.div`
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #141414;
+
+  input[type='color'] {
+    width: 100%;
+  }
+`;
+
 export const History = styled.div`
   display: flex;
   margin-top: 6px;
@@ -71,6 +86,7 @@ export const HistoryPixel = styled.div`
   width: 20px;
   height: 20px;
   background-color: ${(props) => props.color};
+  border: 1px solid #999;
 `;
 
 export const Buttons = styled.div`
