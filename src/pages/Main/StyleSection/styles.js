@@ -77,19 +77,25 @@ export const Buttons = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 6px;
+`;
 
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+export const ClearButton = styled.button.attrs({
+  type: 'button',
+})`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    width: 100%;
-    padding: 5px;
-    margin: 0 1px;
+  width: 100%;
+  padding: 5px;
+  margin: 0 1px;
 
-    background: #7159c1;
-    border: 0;
-    border-radius: 4px;
-    color: #fff;
+  background: #7159c1;
+  border: 0;
+  border-radius: 4px;
+  color: ${(props) => (props.security ? '#fff' : '#d66f0f')};
+
+  svg {
+    margin-right: 5px;
   }
 `;

@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { FiAlertCircle } from 'react-icons/fi';
 
 import PropTypes from 'prop-types';
 
@@ -11,6 +13,7 @@ import {
   History,
   HistoryPixel,
   Buttons,
+  ClearButton,
 } from './styles';
 
 export default function StyleSection({
@@ -21,6 +24,8 @@ export default function StyleSection({
   colorRef,
   history,
 }) {
+  const [clearSecurityLayer, setClearSecurityLayer] = useState(true);
+
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
       const { keyCode } = e;
@@ -46,6 +51,11 @@ export default function StyleSection({
 
   function handleChangeColor(color) {
     colorRef.current.value = color;
+  }
+
+  function handleClear() {
+    setClearSecurityLayer(true);
+    onClearImage();
   }
 
   return (
@@ -85,9 +95,19 @@ export default function StyleSection({
       </History>
 
       <Buttons>
-        <button type="button" onClick={onClearImage}>
-          Limpar
-        </button>
+        {clearSecurityLayer ? (
+          <ClearButton onClick={() => setClearSecurityLayer(false)} security>
+            Limpar
+          </ClearButton>
+        ) : (
+          <ClearButton // eslint-disable-line jsx-a11y/mouse-events-have-key-events
+            onMouseOut={() => setClearSecurityLayer(true)}
+            onClick={handleClear}
+          >
+            <FiAlertCircle size={16} color="#d66f0f" />
+            Tem certeza?
+          </ClearButton>
+        )}
       </Buttons>
     </Container>
   );
