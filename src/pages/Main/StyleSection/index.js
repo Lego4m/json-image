@@ -2,9 +2,18 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Container, Buttons } from './styles';
+import { Container, History, HistoryPixel, Buttons } from './styles';
 
-export default function StyleSection({ onChangeName, onClearImage, colorRef }) {
+export default function StyleSection({
+  onChangeName,
+  onClearImage,
+  colorRef,
+  history,
+}) {
+  function handleChangeColor(color) {
+    colorRef.current.value = color;
+  }
+
   return (
     <Container>
       <input
@@ -15,6 +24,16 @@ export default function StyleSection({ onChangeName, onClearImage, colorRef }) {
       />
 
       <input type="color" defaultValue="#ffffff" ref={colorRef} />
+
+      <History>
+        {history.map((color) => (
+          <HistoryPixel
+            key={`HP${color}`}
+            color={color}
+            onClick={() => handleChangeColor(color)}
+          />
+        ))}
+      </History>
 
       <Buttons>
         <button type="button" onClick={onClearImage}>
@@ -30,4 +49,9 @@ StyleSection.propTypes = {
   colorRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
     .isRequired,
   onClearImage: PropTypes.func.isRequired,
+  history: PropTypes.arrayOf(PropTypes.string),
+};
+
+StyleSection.defaultProps = {
+  history: [],
 };

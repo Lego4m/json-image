@@ -25,6 +25,19 @@ export const Container = styled.section`
   }
 `;
 
+export const History = styled.div`
+  display: flex;
+  margin-top: 6px;
+`;
+
+export const HistoryPixel = styled.div`
+  cursor: pointer;
+  margin: 1px;
+  width: 20px;
+  height: 20px;
+  background-color: ${(props) => props.color};
+`;
+
 export const Buttons = styled.div`
   display: flex;
   justify-content: center;
