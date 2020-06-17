@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { ZoomIn, ZoomOut } from 'react-feather';
+import { FiZoomIn, FiZoomOut } from 'react-icons/fi';
 
 import { Container, Row, Pixel, Buttons } from './styles';
 
-export default function JsonImage({ data, size, onChangeColor, canResize }) {
+export default function JsonImage({ data, size, onClickInPixel, canResize }) {
   const [pixelSize, setPixelSize] = useState(size);
 
   function handleZoomIn() {
@@ -32,10 +32,10 @@ export default function JsonImage({ data, size, onChangeColor, canResize }) {
       {canResize && (
         <Buttons>
           <button type="button" onClick={handleZoomIn}>
-            <ZoomIn color="#fff" />
+            <FiZoomIn size={24} color="#fff" />
           </button>
           <button type="button" onClick={handleZoomOut}>
-            <ZoomOut color="#fff" />
+            <FiZoomOut size={24} color="#fff" />
           </button>
         </Buttons>
       )}
@@ -47,7 +47,7 @@ export default function JsonImage({ data, size, onChangeColor, canResize }) {
               key={String(`${rowIndex}${pixelIndex}`)}
               color={color}
               size={pixelSize}
-              onClick={() => onChangeColor([rowIndex, pixelIndex])}
+              onClick={() => onClickInPixel([rowIndex, pixelIndex])}
             />
           ))}
         </Row>
@@ -62,7 +62,7 @@ JsonImage.propTypes = {
     image: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   }).isRequired,
   size: PropTypes.number,
-  onChangeColor: PropTypes.func.isRequired,
+  onClickInPixel: PropTypes.func.isRequired,
   canResize: PropTypes.bool,
 };
 

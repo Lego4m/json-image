@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import { MdBorderColor, MdColorize } from 'react-icons/md';
+import { FaEraser } from 'react-icons/fa';
+
 export const Container = styled.section`
   display: flex;
   flex: 1;
@@ -23,6 +26,38 @@ export const Container = styled.section`
     width: 100%;
     margin-top: 6px;
   }
+`;
+
+export const Tools = styled.div`
+  display: flex;
+  margin-top: 6px;
+`;
+
+export const PencilTool = styled(MdBorderColor).attrs(({ selected }) => ({
+  title: 'Q - Lápis',
+  size: 24,
+  color: selected ? '#55ff00' : '#999',
+}))`
+  cursor: pointer;
+  margin: 0 2px;
+`;
+
+export const DropperTool = styled(MdColorize).attrs(({ selected }) => ({
+  title: 'W - Conta-gotas',
+  size: 24,
+  color: selected ? '#55ff00' : '#999',
+}))`
+  cursor: pointer;
+  margin: 0 2px;
+`;
+
+export const EraserTool = styled(FaEraser).attrs(({ selected }) => ({
+  title: 'E - Borracha',
+  size: 24,
+  color: selected ? '#55ff00' : '#999',
+}))`
+  cursor: pointer;
+  margin: 0 2px;
 `;
 
 export const History = styled.div`

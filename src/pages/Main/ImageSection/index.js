@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { PlusCircle, MinusCircle } from 'react-feather';
+import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
 
 import JsonImage from '../../../components/JsonImage';
 
@@ -10,19 +10,19 @@ import { Container, Buttons } from './styles';
 
 export default function ImageSection({
   data,
-  onChangeColor,
+  onClickInPixel,
   onAddRow,
   onRemoveRow,
 }) {
   return (
     <Container>
-      <JsonImage data={data} onChangeColor={onChangeColor} />
+      <JsonImage data={data} onClickInPixel={onClickInPixel} />
       <Buttons>
         <button type="button" onClick={onRemoveRow}>
-          <MinusCircle size={18} />
+          <FiMinusCircle size={18} />
         </button>
         <button type="button" onClick={onAddRow}>
-          <PlusCircle size={18} />
+          <FiPlusCircle size={18} />
         </button>
       </Buttons>
     </Container>
@@ -34,7 +34,7 @@ ImageSection.propTypes = {
     name: PropTypes.string,
     image: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   }).isRequired,
-  onChangeColor: PropTypes.func.isRequired,
+  onClickInPixel: PropTypes.func.isRequired,
   onAddRow: PropTypes.func.isRequired,
   onRemoveRow: PropTypes.func.isRequired,
 };

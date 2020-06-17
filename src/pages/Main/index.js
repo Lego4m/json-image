@@ -10,7 +10,10 @@ import { Container, Sections } from './styles';
 
 export default function Main() {
   const [data, setData] = useState(blank);
+
+  const [tool, setTool] = useState('pencil');
   const [colorsHistory, setColorsHistory] = useState([]);
+
   const colorRef = useRef();
 
   function changeColorHistory(color) {
@@ -30,16 +33,29 @@ export default function Main() {
     setColorsHistory([...colorsHistory, color]);
   }
 
-  function handleChangeColor(location) {
-    const { value: color } = colorRef.current;
+  function handleClickInPixel(location) {
     const [row, pixel] = location;
-
     const localData = { ...data };
 
-    localData.image[row][pixel] = color;
+    switch (tool) {
+      case 'pencil':
+        localData.image[row][pixel] = colorRef.current.value;
 
-    setData(localData);
-    changeColorHistory(color);
+        setData(localData);
+        changeColorHistory(colorRef.current.value);
+        break;
+
+      case 'dropper':
+        colorRef.current.value = localData.image[row][pixel];
+        break;
+
+      case 'eraser':
+        localData.image[row][pixel] = '#ffffff';
+        setData(localData);
+        break;
+
+      default:
+    }
   }
 
   function handleChangeName(name) {
@@ -82,13 +98,15 @@ export default function Main() {
           <StyleSection
             onChangeName={handleChangeName}
             onClearImage={handleClearImage}
+            onChangeTool={setTool}
+            tool={tool}
             history={colorsHistory}
             colorRef={colorRef}
           />
 
           <ImageSection
             data={data}
-            onChangeColor={handleChangeColor}
+            onClickInPixel={handleClickInPixel}
             onAddRow={handleAddRow}
             onRemoveRow={handleRemoveRow}
           />
