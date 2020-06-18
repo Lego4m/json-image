@@ -70,6 +70,14 @@ export default function Main() {
     setData(localData);
   }
 
+  function handleAddColumn() {
+    const localData = { ...data };
+
+    localData.image.map((row) => row.push('#ffffff'));
+
+    setData(localData);
+  }
+
   function handleRemoveRow() {
     if (data.image.length <= 1) {
       return;
@@ -77,6 +85,17 @@ export default function Main() {
     const localData = { ...data };
 
     localData.image.pop();
+
+    setData(localData);
+  }
+
+  function handleRemoveColumn() {
+    if (data.image[0].length <= 1) {
+      return;
+    }
+    const localData = { ...data };
+
+    localData.image.map((row) => row.pop());
 
     setData(localData);
   }
@@ -108,7 +127,9 @@ export default function Main() {
             data={data}
             onClickInPixel={handleClickInPixel}
             onAddRow={handleAddRow}
+            onAddColumn={handleAddColumn}
             onRemoveRow={handleRemoveRow}
+            onRemoveColumn={handleRemoveColumn}
           />
 
           <JsonSection data={data} onCode={setData} />

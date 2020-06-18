@@ -16,20 +16,25 @@ export const Buttons = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 6px;
+`;
+
+export const SizeControlButton = styled.div`
+  display: flex;
+  align-items: center;
+
+  background: #7159c1;
+  margin: 0 2px;
+  border-radius: 4px;
 
   button {
     display: flex;
-    justify-content: center;
-    align-items: center;
 
-    max-width: 40px;
-    width: 100%;
     padding: 5px;
-    margin: 0 1px;
-
-    background: #7159c1;
+    background: none;
     border: 0;
-    border-radius: 4px;
-    color: #fff;
+  }
+
+  svg {
+    margin: 0 1px;
   }
 `;
