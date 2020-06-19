@@ -15,7 +15,14 @@ export const Container = styled.section`
 export const Buttons = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 6px;
+
+  span {
+    color: #999;
+    font-size: 12px;
+    margin: 0 4px;
+  }
 `;
 
 export const SizeControlButton = styled.div`

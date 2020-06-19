@@ -52,6 +52,10 @@ export default function ImageSection({
           </button>
         </SizeControlButton>
 
+        <span>
+          {data.image[0].length}x{data.image.length}
+        </span>
+
         <SizeControlButton>
           <button type="button" onClick={() => onAddRow('begin')}>
             <FiArrowUp size={18} color="#fff" />
