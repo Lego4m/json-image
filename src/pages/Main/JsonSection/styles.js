@@ -30,14 +30,31 @@ export const Buttons = styled.div`
   margin-top: 6px;
 
   button {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     padding: 5px;
-    margin: 0 1px;
+    margin: 0 2px;
 
     background: #7159c1;
     border: 0;
     border-radius: 4px;
     color: #fff;
-    text-align: center;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 5px;
+    margin: 0 2px;
+
+    background: #7159c1;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
   }
 `;

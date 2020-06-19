@@ -45,10 +45,6 @@ export default function StyleSection({
         default:
       }
     });
-
-    return () => {
-      document.removeEventListener('keydown');
-    };
   }, [onChangeTool]);
 
   function handleChangeColor(color) {
