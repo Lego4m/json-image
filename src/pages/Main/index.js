@@ -62,40 +62,80 @@ export default function Main() {
     setData({ ...data, name });
   }
 
-  function handleAddRow() {
+  function handleAddRow(location) {
     const localData = { ...data };
 
-    localData.image.push(localData.image[0].map(() => '#ffffff'));
+    switch (location) {
+      case 'begin':
+        localData.image.unshift(localData.image[0].map(() => '#ffffff'));
+        break;
+
+      case 'end':
+        localData.image.push(localData.image[0].map(() => '#ffffff'));
+        break;
+
+      default:
+    }
 
     setData(localData);
   }
 
-  function handleAddColumn() {
+  function handleAddColumn(location) {
     const localData = { ...data };
 
-    localData.image.map((row) => row.push('#ffffff'));
+    switch (location) {
+      case 'begin':
+        localData.image.map((row) => row.unshift('#ffffff'));
+        break;
+
+      case 'end':
+        localData.image.map((row) => row.push('#ffffff'));
+        break;
+
+      default:
+    }
 
     setData(localData);
   }
 
-  function handleRemoveRow() {
+  function handleRemoveRow(location) {
     if (data.image.length <= 1) {
       return;
     }
     const localData = { ...data };
 
-    localData.image.pop();
+    switch (location) {
+      case 'begin':
+        localData.image.shift();
+        break;
+
+      case 'end':
+        localData.image.pop();
+        break;
+
+      default:
+    }
 
     setData(localData);
   }
 
-  function handleRemoveColumn() {
+  function handleRemoveColumn(location) {
     if (data.image[0].length <= 1) {
       return;
     }
     const localData = { ...data };
 
-    localData.image.map((row) => row.pop());
+    switch (location) {
+      case 'begin':
+        localData.image.map((row) => row.shift());
+        break;
+
+      case 'end':
+        localData.image.map((row) => row.pop());
+        break;
+
+      default:
+    }
 
     setData(localData);
   }

@@ -21,6 +21,7 @@ export const Buttons = styled.div`
 export const SizeControlButton = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
 
   background: #7159c1;
   margin: 0 2px;
@@ -29,12 +30,22 @@ export const SizeControlButton = styled.div`
   button {
     display: flex;
 
-    padding: 5px;
     background: none;
     border: 0;
-  }
 
-  svg {
-    margin: 0 1px;
+    margin: 2px 0;
+  }
+`;
+
+export const SizeButtonLine = styled.div`
+  display: flex;
+
+  button {
+    display: flex;
+
+    background: none;
+    border: 0;
+
+    margin: 0 2px;
   }
 `;

@@ -2,12 +2,23 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
-import { GiVerticalFlip, GiHorizontalFlip } from 'react-icons/gi';
+import {
+  FiPlusCircle,
+  FiMinusCircle,
+  FiArrowDown,
+  FiArrowUp,
+  FiArrowRight,
+  FiArrowLeft,
+} from 'react-icons/fi';
 
 import JsonImage from '../../../components/JsonImage';
 
-import { Container, Buttons, SizeControlButton } from './styles';
+import {
+  Container,
+  Buttons,
+  SizeControlButton,
+  SizeButtonLine,
+} from './styles';
 
 export default function ImageSection({
   data,
@@ -22,22 +33,42 @@ export default function ImageSection({
       <JsonImage data={data} onClickInPixel={onClickInPixel} />
       <Buttons>
         <SizeControlButton>
-          <button type="button" onClick={onRemoveRow}>
-            <GiVerticalFlip color="#fff" size={18} />
+          <button type="button" onClick={() => onRemoveRow('begin')}>
+            <FiArrowDown size={18} color="#fff" />
           </button>
-          <FiMinusCircle size={18} color="#fff" />
-          <button type="button" onClick={onRemoveColumn}>
-            <GiHorizontalFlip color="#fff" size={18} />
+          <SizeButtonLine>
+            <button type="button" onClick={() => onRemoveColumn('begin')}>
+              <FiArrowRight size={18} color="#fff" />
+            </button>
+
+            <FiMinusCircle size={18} color="#fff" />
+
+            <button type="button" onClick={() => onRemoveColumn('end')}>
+              <FiArrowLeft size={18} color="#fff" />
+            </button>
+          </SizeButtonLine>
+          <button type="button" onClick={() => onRemoveRow('end')}>
+            <FiArrowUp size={18} color="#fff" />
           </button>
         </SizeControlButton>
 
         <SizeControlButton>
-          <button type="button" onClick={onAddRow}>
-            <GiVerticalFlip color="#fff" size={18} />
+          <button type="button" onClick={() => onAddRow('begin')}>
+            <FiArrowUp size={18} color="#fff" />
           </button>
-          <FiPlusCircle size={18} color="#fff" />
-          <button type="button" onClick={onAddColumn}>
-            <GiHorizontalFlip color="#fff" size={18} />
+          <SizeButtonLine>
+            <button type="button" onClick={() => onAddColumn('begin')}>
+              <FiArrowLeft size={18} color="#fff" />
+            </button>
+
+            <FiPlusCircle size={18} color="#fff" />
+
+            <button type="button" onClick={() => onAddColumn('end')}>
+              <FiArrowRight size={18} color="#fff" />
+            </button>
+          </SizeButtonLine>
+          <button type="button" onClick={() => onAddRow('end')}>
+            <FiArrowDown size={18} color="#fff" />
           </button>
         </SizeControlButton>
       </Buttons>
