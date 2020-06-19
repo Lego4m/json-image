@@ -17,7 +17,7 @@ export const Row = styled.div`
 `;
 
 export const Pixel = styled.div`
-  margin: 0.5px;
+  margin: ${(props) => (props.photoMode ? '0px' : '0.5px')};
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
   background-color: ${(props) => props.color};
@@ -35,7 +35,7 @@ export const Buttons = styled.div`
 
     max-width: 40px;
     width: 100%;
-    margin: 0 1px;
+    margin: 0 3px;
 
     background: none;
     border: 0;

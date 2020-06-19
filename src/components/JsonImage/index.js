@@ -3,11 +3,19 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { FiZoomIn, FiZoomOut } from 'react-icons/fi';
+import { MdCameraAlt } from 'react-icons/md';
 
 import { Container, Row, Pixel, Buttons } from './styles';
 
-export default function JsonImage({ data, size, onClickInPixel, canResize }) {
+export default function JsonImage({
+  data,
+  size,
+  onClickInPixel,
+  canResize,
+  canChangePhotoMode,
+}) {
   const [pixelSize, setPixelSize] = useState(size);
+  const [photoMode, setPhotoMode] = useState(false);
 
   function handleZoomIn() {
     if (pixelSize >= 28) {
@@ -34,6 +42,11 @@ export default function JsonImage({ data, size, onClickInPixel, canResize }) {
           <button type="button" onClick={handleZoomIn}>
             <FiZoomIn size={24} color="#fff" />
           </button>
+          {canChangePhotoMode && (
+            <button type="button" onClick={() => setPhotoMode(!photoMode)}>
+              <MdCameraAlt size={24} color={photoMode ? '#55ff00' : '#999'} />
+            </button>
+          )}
           <button type="button" onClick={handleZoomOut}>
             <FiZoomOut size={24} color="#fff" />
           </button>
@@ -48,6 +61,7 @@ export default function JsonImage({ data, size, onClickInPixel, canResize }) {
               color={color}
               size={pixelSize}
               onClick={() => onClickInPixel([rowIndex, pixelIndex])}
+              photoMode={photoMode}
             />
           ))}
         </Row>
@@ -64,10 +78,12 @@ JsonImage.propTypes = {
   size: PropTypes.number,
   onClickInPixel: PropTypes.func,
   canResize: PropTypes.bool,
+  canChangePhotoMode: PropTypes.bool,
 };
 
 JsonImage.defaultProps = {
   onClickInPixel: () => {},
   size: 20,
   canResize: true,
+  canChangePhotoMode: true,
 };
