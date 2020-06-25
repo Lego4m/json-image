@@ -10,12 +10,13 @@ import { Container, Row, Pixel, Buttons } from './styles';
 export default function JsonImage({
   data,
   size,
+  photo,
   onClickInPixel,
   canResize,
   canChangePhotoMode,
 }) {
   const [pixelSize, setPixelSize] = useState(size);
-  const [photoMode, setPhotoMode] = useState(false);
+  const [photoMode, setPhotoMode] = useState(photo);
 
   function handleZoomIn() {
     if (pixelSize >= 28) {
@@ -79,6 +80,7 @@ JsonImage.propTypes = {
   onClickInPixel: PropTypes.func,
   canResize: PropTypes.bool,
   canChangePhotoMode: PropTypes.bool,
+  photo: PropTypes.bool,
 };
 
 JsonImage.defaultProps = {
@@ -86,4 +88,5 @@ JsonImage.defaultProps = {
   size: 20,
   canResize: true,
   canChangePhotoMode: true,
+  photo: false,
 };
