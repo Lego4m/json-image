@@ -11,6 +11,7 @@ export default function JsonImage({
   data,
   size,
   photo,
+  zoomRange,
   onClickInPixel,
   canResize,
   canChangePhotoMode,
@@ -19,7 +20,7 @@ export default function JsonImage({
   const [photoMode, setPhotoMode] = useState(photo);
 
   function handleZoomIn() {
-    if (pixelSize >= 28) {
+    if (pixelSize >= 20 + zoomRange) {
       return;
     }
 
@@ -27,7 +28,7 @@ export default function JsonImage({
   }
 
   function handleZoomOut() {
-    if (pixelSize <= 12) {
+    if (pixelSize <= 20 - zoomRange) {
       return;
     }
 
@@ -77,16 +78,18 @@ JsonImage.propTypes = {
     image: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   }).isRequired,
   size: PropTypes.number,
+  photo: PropTypes.bool,
+  zoomRange: PropTypes.number,
   onClickInPixel: PropTypes.func,
   canResize: PropTypes.bool,
   canChangePhotoMode: PropTypes.bool,
-  photo: PropTypes.bool,
 };
 
 JsonImage.defaultProps = {
   onClickInPixel: () => {},
   size: 20,
+  photo: false,
+  zoomRange: 10,
   canResize: true,
   canChangePhotoMode: true,
-  photo: false,
 };
