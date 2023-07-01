@@ -22,3 +22,10 @@ export const formSchema = yup.object({
 });
 
 export type FormValues = yup.InferType<typeof formSchema>;
+
+export const defaultValues: FormValues = {
+  name: 'My amazing pixel art',
+  image: {
+    lines: Array(20).fill({ pixels: Array(20).fill({ color: '#ffffff' }) }),
+  },
+};
