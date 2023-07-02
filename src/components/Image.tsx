@@ -4,6 +4,13 @@ import { IoAdd, IoRemove } from 'react-icons/io5';
 import { useEditor } from '../hooks/useEditor';
 
 import type { FormValues } from '../utils/form';
+import {
+  dispatchResizeAction,
+  useVerticalResizeAction,
+  useHorizontalResizeAction,
+  type ResizeAction,
+  type Position,
+} from '../utils/ResizeEvents';
 
 export function Image() {
   return (
@@ -37,13 +44,17 @@ function Controls({ children }: ControlsProps) {
 
 interface ActionGroupProps {
   column?: boolean;
-  position: 'Top' | 'Right' | 'Bottom' | 'Left';
+  position: Position;
 }
 
-function ActionGroup({ column = false }: ActionGroupProps) {
+function ActionGroup({ column = false, position }: ActionGroupProps) {
   const { isInPhotoMode } = useEditor();
 
   if (isInPhotoMode) return;
+
+  function handleClick(resizeAction: ResizeAction) {
+    dispatchResizeAction(resizeAction, position);
+  }
 
   return (
     <div
@@ -56,11 +67,11 @@ function ActionGroup({ column = false }: ActionGroupProps) {
         ${column ? 'flex-col' : 'flex-row'}
       `}
     >
-      <button>
+      <button onClick={() => handleClick('Add')}>
         <IoAdd />
       </button>
 
-      <button>
+      <button onClick={() => handleClick('Remove')}>
         <IoRemove />
       </button>
     </div>
@@ -68,7 +79,11 @@ function ActionGroup({ column = false }: ActionGroupProps) {
 }
 
 function Canvas() {
-  const { fields } = useFieldArray<FormValues>({ name: 'image.lines' });
+  const { fields, prepend, append, remove } = useFieldArray<FormValues>({
+    name: 'image.lines',
+  });
+
+  useVerticalResizeAction({ prepend, append, remove });
 
   return (
     <LineRowContainer column={true}>
@@ -84,9 +99,11 @@ interface LineProps {
 }
 
 function Line({ lineIndex }: LineProps) {
-  const { fields } = useFieldArray<FormValues>({
+  const { fields, append, prepend, remove } = useFieldArray<FormValues>({
     name: `image.lines.${lineIndex}.pixels`,
   });
+
+  useHorizontalResizeAction({ append, prepend, remove });
 
   return (
     <LineRowContainer column={false}>

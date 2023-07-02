@@ -23,9 +23,17 @@ export const formSchema = yup.object({
 
 export type FormValues = yup.InferType<typeof formSchema>;
 
+export const defaultPixelColor = '#ffffff';
+
+export const defaultLine = getLineFromPixelsLength(20);
+
 export const defaultValues: FormValues = {
   name: 'My amazing pixel art',
   image: {
-    lines: Array(20).fill({ pixels: Array(20).fill({ color: '#ffffff' }) }),
+    lines: Array(20).fill(defaultLine),
   },
 };
+
+export function getLineFromPixelsLength(length: number) {
+  return { pixels: Array(length).fill({ color: defaultPixelColor }) };
+}
