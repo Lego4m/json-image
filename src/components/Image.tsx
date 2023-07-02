@@ -1,19 +1,17 @@
-import { Controller, useFormContext, useFieldArray } from 'react-hook-form';
-import type { Control } from 'react-hook-form';
+import { Controller, useFieldArray } from 'react-hook-form';
 
-import type { FormValues } from '../utils/form';
 import { useEditor } from '../hooks/useEditor';
 
-export function Image() {
-  const { control } = useFormContext<FormValues>();
+import type { FormValues } from '../utils/form';
 
-  const { fields } = useFieldArray({ control, name: 'image.lines' });
+export function Image() {
+  const { fields } = useFieldArray<FormValues>({ name: 'image.lines' });
 
   return (
     <div className="flex justify-center">
       <div className="flex flex-col gap-1">
         {fields.map((field, index) => (
-          <Line key={field.id} control={control} lineIndex={index} />
+          <Line key={field.id} lineIndex={index} />
         ))}
       </div>
     </div>
@@ -21,13 +19,11 @@ export function Image() {
 }
 
 interface LineProps {
-  control: Control<FormValues>;
   lineIndex: number;
 }
 
-function Line({ control, lineIndex }: LineProps) {
-  const { fields } = useFieldArray({
-    control,
+function Line({ lineIndex }: LineProps) {
+  const { fields } = useFieldArray<FormValues>({
     name: `image.lines.${lineIndex}.pixels`,
   });
 
@@ -36,7 +32,6 @@ function Line({ control, lineIndex }: LineProps) {
       {fields.map((field, index) => (
         <Controller
           key={field.id}
-          control={control}
           name={`image.lines.${lineIndex}.pixels.${index}.color`}
           render={({ field: { value, onChange } }) => (
             <Pixel background={value} onClick={onChange} />
