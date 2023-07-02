@@ -1,5 +1,4 @@
-import { createContext, useState } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useState, type ReactNode } from 'react';
 
 interface EditorContextDataProps {
   selectedColor: string;

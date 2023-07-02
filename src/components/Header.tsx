@@ -1,7 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { formSchema } from '../utils/form';
-import type { FormValues } from '../utils/form';
+import { formSchema, type FormValues } from '../utils/form';
 
 import { TogglePhotoMode } from './TogglePhotoMode';
 

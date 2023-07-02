@@ -4,13 +4,12 @@ import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { Editor } from './components/Editor';
 
-import { defaultValues } from './utils/form';
-import type { FormValues } from './utils/form';
+import { defaultFormValues, type FormValues } from './utils/form';
 
 import { EditorContextProvider } from './contexts/EditorContext';
 
 function App() {
-  const form = useForm<FormValues>({ defaultValues });
+  const form = useForm<FormValues>({ defaultValues: defaultFormValues });
 
   return (
     <FormProvider {...form}>

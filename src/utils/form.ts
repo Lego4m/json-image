@@ -27,7 +27,7 @@ export const defaultPixelColor = '#ffffff';
 
 export const defaultLine = getLineFromPixelsLength(20);
 
-export const defaultValues: FormValues = {
+export const defaultFormValues: FormValues = {
   name: 'My amazing pixel art',
   image: {
     lines: Array(20).fill(defaultLine),
