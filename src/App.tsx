@@ -14,10 +14,10 @@ function App() {
   return (
     <FormProvider {...form}>
       <EditorContextProvider>
-        <div className="p-4">
+        <div className="p-2 sm:p-4">
           <Header />
 
-          <div className="mt-4 flex gap-2">
+          <div className="mt-2 flex flex-col gap-2 lg:flex-row">
             <Sidebar />
 
             <Editor />

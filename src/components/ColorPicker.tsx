@@ -12,7 +12,7 @@ export function ColorPicker() {
   ).current;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col items-center gap-4">
       <CirclePicker
         color={selectedColor}
         onChangeComplete={(e) => setSelectedColor(e.hex)}

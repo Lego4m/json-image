@@ -14,7 +14,7 @@ import {
 
 export function Image() {
   return (
-    <div className="flex justify-center">
+    <div className="mx-auto">
       <Controls>
         <Canvas />
       </Controls>
@@ -155,6 +155,10 @@ function Pixel({ background, onClick }: PixelProps) {
   }
 
   return (
-    <div onClick={handleClick} className="h-5 w-5" style={{ background }} />
+    <div
+      onClick={handleClick}
+      className="h-4 w-4 sm:h-5 sm:w-5"
+      style={{ background }}
+    />
   );
 }
