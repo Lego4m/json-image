@@ -1,4 +1,5 @@
 import { Controller, useFieldArray } from 'react-hook-form';
+import { IoAdd, IoRemove } from 'react-icons/io5';
 
 import { useEditor } from '../hooks/useEditor';
 
@@ -7,7 +8,61 @@ import type { FormValues } from '../utils/form';
 export function Image() {
   return (
     <div className="flex justify-center">
-      <Canvas />
+      <Controls>
+        <Canvas />
+      </Controls>
+    </div>
+  );
+}
+
+interface ControlsProps {
+  children: React.ReactNode;
+}
+
+function Controls({ children }: ControlsProps) {
+  return (
+    <div className="flex flex-col gap-2">
+      <ActionGroup position="Top" />
+
+      <div className="flex gap-2">
+        <ActionGroup position="Left" column={true} />
+        {children}
+        <ActionGroup position="Right" column={true} />
+      </div>
+
+      <ActionGroup position="Bottom" />
+    </div>
+  );
+}
+
+interface ActionGroupProps {
+  column?: boolean;
+  position: 'Top' | 'Right' | 'Bottom' | 'Left';
+}
+
+function ActionGroup({ column = false }: ActionGroupProps) {
+  const { isInPhotoMode } = useEditor();
+
+  if (isInPhotoMode) return;
+
+  return (
+    <div
+      className={`
+        flex
+        items-center
+        justify-center
+        text-2xl
+        text-white
+        ${column ? 'flex-col' : 'flex-row'}
+      `}
+    >
+      <button>
+        <IoAdd />
+      </button>
+
+      <button>
+        <IoRemove />
+      </button>
     </div>
   );
 }
