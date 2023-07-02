@@ -54,7 +54,8 @@ function LineRowContainer({ children, column }: LineRowContainerProps) {
     <div
       className={`
         flex
-        ${column ? 'flex-col' : 'flex-row'} 
+        overflow-hidden
+        ${column ? 'flex-col rounded' : 'flex-row'}
         ${isInPhotoMode ? 'gap-0' : 'gap-0.5'}
       `}
     >
