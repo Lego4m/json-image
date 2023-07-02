@@ -5,16 +5,22 @@ import { useEditor } from '../hooks/useEditor';
 import type { FormValues } from '../utils/form';
 
 export function Image() {
+  return (
+    <div className="flex justify-center">
+      <Canvas />
+    </div>
+  );
+}
+
+function Canvas() {
   const { fields } = useFieldArray<FormValues>({ name: 'image.lines' });
 
   return (
-    <div className="flex justify-center">
-      <LineRowContainer column={true}>
-        {fields.map((field, index) => (
-          <Line key={field.id} lineIndex={index} />
-        ))}
-      </LineRowContainer>
-    </div>
+    <LineRowContainer column={true}>
+      {fields.map((field, index) => (
+        <Line key={field.id} lineIndex={index} />
+      ))}
+    </LineRowContainer>
   );
 }
 
