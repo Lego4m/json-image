@@ -44,7 +44,7 @@ export function Header() {
 
   return (
     <header className="flex flex-col justify-between gap-2 sm:flex-row">
-      <h1 className="text-center text-4xl font-bold text-white">JSON-IMAGE</h1>
+      <h1 className="text-center text-4xl font-bold text-white">JSON IMAGE</h1>
 
       <div className="flex flex-col gap-2 sm:flex-row-reverse">
         <button
