@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 interface EditorContextDataProps {
   selectedColor: string;
-  setSelectedColor: (newValue: string) => void;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface EditorContextProviderProps {
