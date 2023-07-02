@@ -112,7 +112,7 @@ function Line({ lineIndex }: LineProps) {
           key={field.id}
           name={`image.lines.${lineIndex}.pixels.${index}.color`}
           render={({ field: { value, onChange } }) => (
-            <Pixel background={value} onClick={onChange} />
+            <Pixel value={value} onChange={onChange} />
           )}
         />
       ))}
@@ -143,22 +143,25 @@ function LineRowContainer({ children, column }: LineRowContainerProps) {
 }
 
 interface PixelProps {
-  background: string;
-  onClick: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-function Pixel({ background, onClick }: PixelProps) {
+function Pixel({ value, onChange }: PixelProps) {
   const { selectedColor } = useEditor();
 
-  function handleClick() {
-    onClick(selectedColor);
+  function handleMouseEvent(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (e.buttons !== 1) return;
+
+    onChange(selectedColor);
   }
 
   return (
     <div
-      onClick={handleClick}
-      className="h-4 w-4 sm:h-5 sm:w-5"
-      style={{ background }}
+      onMouseDown={handleMouseEvent}
+      onMouseOver={handleMouseEvent}
+      className="h-4 w-4 select-none sm:h-5 sm:w-5"
+      style={{ background: value }}
     />
   );
 }
