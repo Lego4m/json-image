@@ -9,11 +9,11 @@ export function Image() {
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col gap-1">
+      <LineRowContainer column={true}>
         {fields.map((field, index) => (
           <Line key={field.id} lineIndex={index} />
         ))}
-      </div>
+      </LineRowContainer>
     </div>
   );
 }
@@ -28,7 +28,7 @@ function Line({ lineIndex }: LineProps) {
   });
 
   return (
-    <div className="flex gap-1">
+    <LineRowContainer column={false}>
       {fields.map((field, index) => (
         <Controller
           key={field.id}
@@ -38,6 +38,27 @@ function Line({ lineIndex }: LineProps) {
           )}
         />
       ))}
+    </LineRowContainer>
+  );
+}
+
+interface LineRowContainerProps {
+  children: React.ReactNode;
+  column: boolean;
+}
+
+function LineRowContainer({ children, column }: LineRowContainerProps) {
+  const { isInPhotoMode } = useEditor();
+
+  return (
+    <div
+      className={`
+        flex
+        ${column ? 'flex-col' : 'flex-row'} 
+        ${isInPhotoMode ? 'gap-0' : 'gap-0.5'}
+      `}
+    >
+      {children}
     </div>
   );
 }
