@@ -1,8 +1,7 @@
 import { Controller, useFieldArray } from 'react-hook-form';
 import { IoAdd, IoRemove } from 'react-icons/io5';
 
-import { useEditor } from '../hooks/useEditor';
-
+import { useEditor } from '../stores/EditorStore';
 import type { FormValues } from '../utils/form';
 import {
   dispatchResizeAction,
@@ -48,7 +47,7 @@ interface ActionGroupProps {
 }
 
 function ActionGroup({ column = false, position }: ActionGroupProps) {
-  const { isInPhotoMode } = useEditor();
+  const isInPhotoMode = useEditor((state) => state.isInPhotoMode);
 
   if (isInPhotoMode) return;
 
@@ -126,7 +125,7 @@ interface LineRowContainerProps {
 }
 
 function LineRowContainer({ children, column }: LineRowContainerProps) {
-  const { isInPhotoMode } = useEditor();
+  const isInPhotoMode = useEditor((state) => state.isInPhotoMode);
 
   return (
     <div
@@ -148,12 +147,12 @@ interface PixelProps {
 }
 
 function Pixel({ value, onChange }: PixelProps) {
-  const { selectedColor } = useEditor();
-
   function handleMouseEvent(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (e.buttons !== 1) return;
 
-    onChange(selectedColor);
+    const { color } = useEditor.getState();
+
+    onChange(color);
   }
 
   return (

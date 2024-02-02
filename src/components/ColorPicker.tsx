@@ -2,25 +2,23 @@ import { useRef } from 'react';
 import { CirclePicker } from 'react-color';
 import debounce from 'lodash.debounce';
 
-import { useEditor } from '../hooks/useEditor';
+import { useEditor } from '../stores/EditorStore';
 
 export function ColorPicker() {
-  const { selectedColor, setSelectedColor } = useEditor();
+  const color = useEditor((state) => state.color);
+  const setColor = useEditor((state) => state.setColor);
 
   const debouncedHandleChange = useRef(
-    debounce((value: string) => setSelectedColor(value), 150)
+    debounce((value: string) => setColor(value), 150)
   ).current;
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <CirclePicker
-        color={selectedColor}
-        onChangeComplete={(e) => setSelectedColor(e.hex)}
-      />
+      <CirclePicker color={color} onChangeComplete={(e) => setColor(e.hex)} />
 
       <label
         className="h-8 w-full cursor-pointer rounded-lg"
-        style={{ backgroundColor: selectedColor }}
+        style={{ backgroundColor: color }}
       >
         <input
           className="hidden"

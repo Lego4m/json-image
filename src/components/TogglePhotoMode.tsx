@@ -1,9 +1,10 @@
 import { IoCameraOutline, IoCamera } from 'react-icons/io5';
 
-import { useEditor } from '../hooks/useEditor';
+import { useEditor } from '../stores/EditorStore';
 
 export function TogglePhotoMode() {
-  const { isInPhotoMode, setIsInPhotoMode } = useEditor();
+  const isInPhotoMode = useEditor((state) => state.isInPhotoMode);
+  const setIsInPhotoMode = useEditor((state) => state.setIsInPhotoMode);
 
   function handleToggle() {
     setIsInPhotoMode(!isInPhotoMode);
